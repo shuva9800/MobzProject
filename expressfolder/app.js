@@ -297,25 +297,94 @@
 // })
 
 //My sql
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 
-// Connection configuration for a local MySQL server
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'mydatabase'
+// // Connection configuration for a local MySQL server
+// const connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'password',
+//   database: 'mydatabase'
+// });
+
+// connection.connect((err) => {
+//   if (err) {
+//     console.error('error connecting: ' + err.stack);
+//     return;
+//   }
+//   console.log('connected as id ' + connection.threadId);
+// });
+
+// module.exports = connection;
+
+// const { MongoClient } = require('mongodb');
+
+// const uri = 'mongodb://127.0.0.1:27017/myData'; 
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// async function run() {
+//     try {
+//         await client.connect();
+//         console.log('Connected to MongoDB');
+        
+//         const database = client.db('myData'); 
+//         const collection = database.collection('mycollection'); 
+
+//         await collection.insertMany([
+//             { name: 'Rahul', age: 21, email: 'rahul@example.com' },
+//             { name: 'oggy', age: 24, email: 'oggy@example.com' },
+//             { name: 'tom', age: 38, email: 'tom@example.com' },
+//             { name: 'warner', age: 30, email: 'warner@example.com' },
+//             { name: 'Noren', age: 25, email: 'noren@example.com' }
+//         ]);
+
+//         // Create indexes
+//         await collection.createIndex({ name: 1 });
+//         await collection.createIndex({ name: 1, age: -1 });
+//         await collection.createIndex({ email: 1 }, { unique: true });
+//         console.log('Indexes created');
+
+//         // Use indexes in queries
+//         const result = await collection.find({ name: 'Rahul' }).toArray();
+//         console.log('Query result:', result);
+
+//         // List indexes
+//         const indexes = await collection.listIndexes().toArray();
+//         console.log('Indexes on the collection:', indexes);
+
+//         // Drop an index
+//         await collection.dropIndex('name_1');
+//         console.log('Index on the name field dropped');
+
+//         // Drop all indexes
+//         await collection.dropIndexes();
+//         console.log('All indexes dropped');
+        
+//     } finally {
+//         await client.close();
+//     }
+// }
+
+// run().catch(console.dir);
+
+const mysql = require('mysql');
+ng
+const pool = mysql.createPool({
+    connectionLimit: 10, // Adjust as needed
+    host: 'hostname',
+    user: 'shuva',
+    password: '....',
+    database: 'mydata'
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
+// Use the pool to execute queries
+pool.query('SELECT * FROM your_table', (error, results, fields) => {
+    if (error) {
+        console.error('Error executing query:', error);
+        return;
+    }
+    console.log('Query results:', results);
 });
-
-module.exports = connection;
 
 
 
